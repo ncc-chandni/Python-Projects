@@ -1,0 +1,94 @@
+## Building a Simple Calculator in Python with Tkinter
+
+Creating a graphical user interface (GUI) for a calculator can be a fun and educational project for anyone interested 
+in learning Python and GUI development. In this blog post, I will walk you through the process of building a basic calculator 
+using Python's `tkinter` library.
+
+### What is Tkinter?
+
+`Tkinter` is the standard GUI toolkit for Python. It provides a fast and easy way to create GUI applications. In this project, 
+I have used `tkinter` to design a simple calculator interface and add functionality to it.
+
+
+
+### Explanation of Code
+
+Let's break down the code step by step:
+
+#### 1. Importing Modules
+
+from tkinter import Tk, Entry, Button, StringVar
+
+We import the necessary modules from `tkinter`.
+
+#### 2. Calculator Class Initialization
+
+
+class Calculator:
+    def __init__(self, master):
+        master.title("Calculator")
+        master.geometry('350x420+0+0')
+        master.config(bg='gray')
+        master.resizable(False, False)
+
+I defined a `Calculator` class and its `__init__` method, which sets up the window properties like title, 
+size, background color, and resizability.
+
+#### 3. Setting Up the Display
+
+self.equation = StringVar()
+self.entry_value = ''
+Entry(width=17, bg='#FFF', fg='#000', font=('Arial Bold', 28), textvariable=self.equation).place(x=0, y=0)
+
+I used a `StringVar` to hold the current equation and an `Entry` widget to display it.
+
+#### 4. Creating Buttons
+
+I created buttons for digits, operators, and functionalities (clear and solve) using the `Button` widget. 
+Each button is placed at specific coordinates using the `place` method.
+
+Button(width=6, height=4, text='1', relief='flat', bg='white', command=lambda: self.show('1')).place(x=0, y=125)
+Button(width=6, height=4, text='=', relief='flat', bg='white', command=self.solve).place(x=270, y=350)
+Button(width=6, height=4, text='C', relief='flat', command=self.clear).place(x=0, y=350)
+
+
+#### 5. Button Command Functions
+
+- **show()**: Appends the clicked button's value to the equation.
+- **clear()**: Clears the equation.
+- **solve()**: Evaluates the equation and displays the result.
+
+def show(self, value):
+    self.entry_value += str(value)
+    self.equation.set(self.entry_value)
+
+def clear(self):
+    self.entry_value = ''
+    self.equation.set(self.entry_value)
+
+def solve(self):
+    try:
+        result = eval(self.entry_value)
+        self.equation.set(result)
+        self.entry_value = str(result)
+    except Exception as e:
+        self.equation.set("Error")
+        self.entry_value = ''
+
+The eval function in Python is a built-in function that parses the expression passed to it and 
+executes Python expressions within the program. 
+
+### Running the Calculator
+
+Finally, I created an instance of the `Tk` class and the `Calculator` class, then start the main event loop.
+
+root = Tk()
+calculator = Calculator(root)
+root.mainloop()
+
+
+### Conclusion
+
+In this tutorial, I've built a simple calculator using Python's `tkinter` library. This project demonstrates 
+the basics of creating a GUI application, handling user input, and performing basic operations. With this foundation, 
+you can further enhance the calculator by adding more features or improving the design. Happy coding!

@@ -1,0 +1,69 @@
+### Creating a QR Code with Python
+
+QR codes are a convenient way to encode information such as URLs, text, or other data types that can be 
+quickly scanned and decoded by smartphones and other devices. In this blog post, we'll walk through the process 
+of creating a QR code using Python with the help of the `qrcode` library.
+
+### Prerequisites
+
+Before we start, make sure you have Python installed on your machine. You'll also need to install the `qrcode` library. 
+You can install it using pip:
+
+pip install qrcode[pil]
+
+### Step-by-Step Guide
+
+Let's dive into the code and see how to create a QR code.
+
+#### 1. Importing the `qrcode` Library
+
+First, we need to import the `qrcode` library. This library provides a simple interface for generating QR codes.
+
+import qrcode
+
+
+#### 2. Creating a QR Code Object
+
+Next, we'll create a `QRCode` object with some configuration settings. These settings include the version, 
+error correction level, box size, and border size.
+
+- **version**: Controls the size of the QR code. Larger numbers generate larger QR codes.
+- **error_correction**: Controls the error correction used for the QR code. Higher levels can recover more data if the QR code is damaged.
+- **box_size**: Controls how many pixels each “box” of the QR code is.
+- **border**: Controls how many boxes thick the border should be.
+
+
+qr = qrcode.QRCode(
+    version=1,
+    error_correction=qrcode.constants.ERROR_CORRECT_H,
+    box_size=20,
+    border=2
+)
+
+
+#### 3. Adding Data to the QR Code
+
+We'll add the data we want to encode into the QR code. In this example, I have encoded a URL to my GitHub profile.
+
+qr.add_data("https://github.com/ncc-chandni")
+qr.make(fit=True)
+
+
+The `fit=True` argument ensures that the QR code is sized appropriately to fit the data.
+
+#### 4. Generating the QR Code Image
+
+Now, we'll generate the QR code image with specific colors for the fill and background. We'll then save this image to a file.
+
+img = qr.make_image(fill_color='black', back_color='white')
+img.save("My_Work.png")
+
+This creates an image with black boxes on a white background and saves it as "My_Work.png".
+
+
+### Conclusion
+
+Creating QR codes in Python is straightforward with the `qrcode` library. This simple script can 
+be extended to include various types of data, and the customization options allow you to tweak the 
+appearance and size of the QR code to suit your needs. Whether you're embedding URLs, text, or other
+ information, QR codes offer a quick and easy way to share data visually.
